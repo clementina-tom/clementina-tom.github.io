@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Clementina Tom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="/assets/img/favicon-48x48.png" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --border: #1e1e1e;
+      --border-light: #2a2a2a;
+      --text: #e8e6e1;
+      --muted: #555;
+      --accent: #c8f542;
+    }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      cursor: none;
+      overflow: hidden;
+    }
+
+    /* Grid background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.4;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(200,245,66,0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease;
+    }
+
+    /* Layout */
+    .wrap {
+      position: relative;
+      z-index: 10;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px;
+    }
+
+    /* Glitchy 404 */
+    .error-code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(100px, 22vw, 220px);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(232,230,225,0.12);
+      position: relative;
+      margin-bottom: 12px;
+      user-select: none;
+    }
+    .error-code::before {
+      content: '404';
+      position: absolute;
+      inset: 0;
+      color: var(--accent);
+      opacity: 0.06;
+      transform: translate(-3px, 2px);
+      pointer-events: none;
+    }
+    .error-code::after {
+      content: '404';
+      position: absolute;
+      inset: 0;
+      color: var(--accent);
+      opacity: 0.04;
+      transform: translate(4px, -3px);
+      pointer-events: none;
+    }
+
+    .error-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .error-label::before,
+    .error-label::after {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+
+    .error-msg {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 360px;
+      margin-bottom: 40px;
+    }
+
+    /* Terminal-style blink */
+    .blink {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Links */
+    .nav-row {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+    }
+    .nav-pill {
+      background: var(--surface);
+      padding: 13px 24px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-pill:hover { background: var(--bg); color: var(--accent); }
+    .nav-pill.primary { background: var(--accent); color: #0a0a0a; }
+    .nav-pill.primary:hover { background: #d4f55a; }
+
+    /* Footer */
+    .footer-404 {
+      position: fixed;
+      bottom: 24px;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: var(--border-light);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="bg-grid"></div>
+
+  <div class="wrap">
+    <div class="error-code">404</div>
+    <div class="error-label">Page not found</div>
+    <p class="error-msg">
+      This page doesn't exist — or moved somewhere else.<span class="blink"></span>
+    </p>
+    <div class="nav-row">
+      <a href="/" class="nav-pill primary">Home</a>
+      <a href="/projects/" class="nav-pill">Projects</a>
+      <a href="/writing/" class="nav-pill">Writing</a>
+      <a href="/about/" class="nav-pill">About</a>
+    </div>
+  </div>
+
+  <div class="footer-404">clementina-tom.github.io</div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function tick(){
+      cursor.style.left = mx-4+'px'; cursor.style.top = my-4+'px';
+      rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+      ring.style.left = rx-16+'px'; ring.style.top = ry-16+'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('mouseenter', ()=>ring.classList.add('hovering'));
+      a.addEventListener('mouseleave', ()=>ring.classList.remove('hovering'));
+    });
+  </script>
+</body>
+</html>
