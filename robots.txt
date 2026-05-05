@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clementina-tom.github.io/sitemap.xml
