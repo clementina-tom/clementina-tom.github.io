@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Clementina Tom</title>
+  <meta name="description" content="About Clementina Tom — ML engineer, Zindi competitor, technical writer. Building production ML systems remotely from Lagos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    /* Bio */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .bio-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.95;
+      margin-bottom: 18px;
+    }
+    .bio-body p:last-child { margin-bottom: 0; }
+    .bio-body p strong { color: var(--text); font-weight: 400; }
+    .bio-body p em { color: var(--accent); font-style: normal; }
+
+    /* Experience timeline */
+    .exp-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+    .exp-item {
+      background: var(--bg);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      transition: background 0.2s;
+    }
+    .exp-item:hover { background: var(--surface); }
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .exp-company { font-size: 12px; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 8px; }
+    .exp-desc { font-size: 12px; color: var(--muted); line-height: 1.8; }
+    .exp-meta { text-align: right; flex-shrink: 0; }
+    .exp-period { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; display: block; margin-bottom: 4px; }
+    .exp-type {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 8px;
+      border: 1px solid var(--border-light);
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 1px;
+    }
+
+    /* Competition card inline */
+    .comp-inline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      background: var(--bg);
+      padding: 24px 32px;
+      border: 1px solid var(--border-light);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .comp-inline:hover { background: var(--surface); border-color: var(--accent); }
+    .comp-inline-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+    .comp-inline-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text); }
+    .comp-inline-score {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      text-align: right;
+    }
+    .comp-inline-score span { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 400; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Contact section */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .contact-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+    .contact-email-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 8px;
+      transition: all 0.2s;
+    }
+    .contact-email-block:hover { color: var(--accent); border-color: var(--accent); }
+    .contact-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+    }
+    .contact-link-row {
+      background: var(--bg);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-link-row:hover { background: var(--surface); }
+    .contact-link-inner { display: flex; align-items: center; gap: 12px; }
+    .contact-link-inner svg { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
+    .contact-link-row:hover .contact-link-inner svg { color: var(--accent); }
+    .contact-link-text { font-size: 13px; color: var(--muted); transition: color 0.2s; }
+    .contact-link-row:hover .contact-link-text { color: var(--accent); }
+    .contact-link-arrow { font-size: 14px; color: var(--border-light); transition: all 0.2s; }
+    .contact-link-row:hover .contact-link-arrow { color: var(--accent); transform: translate(3px,-3px); }
+
+    @media (max-width: 768px) {
+      .bio-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-meta { text-align: left; }
+      .comp-inline { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav id="nav">
+    <a href="../index.html" class="nav-logo">CT<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects/index.html">Projects</a></li>
+      <li><a href="../writing/index.html">Writing</a></li>
+      <li><a href="index.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="../index.html">Home</a>
+    <a href="../projects/index.html">Projects</a>
+    <a href="../writing/index.html">Writing</a>
+    <a href="index.html" class="active">About</a>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- Bio -->
+    <section class="section">
+      <div class="reveal">
+        <div class="section-label">About</div>
+        <h1 class="section-title">Clementina<br/><em>Tom</em></h1>
+      </div>
+      <div class="bio-grid reveal">
+        <div class="bio-body">
+          <p>
+            I'm an <strong>ML and data engineer</strong> with over four years of experience
+            building systems that bridge research-quality models and production-grade
+            infrastructure. My work spans <em>RAG/LLM systems</em>, <em>MLOps pipelines</em>,
+            <em>time-series forecasting</em>, and <em>data engineering</em> — with a clear bias
+            toward work that actually ships and performs in the real world.
+          </p>
+          <p>
+            I care about the full stack of ML: not just getting a model to train, but understanding
+            why it works, what breaks it, and how to make it reliable and maintainable in a
+            production environment. I think in systems, not just models.
+          </p>
+          <p>
+            Alongside client work, I compete on <strong>Zindi</strong> — the African ML competition
+            platform — and write technical articles for <strong>Towards Data Science</strong>.
+            Both keep me honest. Competitions reward rigour; writing demands clarity.
+          </p>
+          <p>
+            I work remotely and I'm deliberate about where I spend my time. I do my best work in
+            environments that value <strong>craft over velocity</strong>, give engineers
+            <strong>genuine autonomy</strong>, and build things with <strong>real-world impact</strong>.
+            Based in Lagos, Nigeria — available to teams worldwide.
+          </p>
+        </div>
+        <div>
+          <div class="stats-row" style="grid-template-columns: 1fr 1fr;">
+            <div class="stat">
+              <div class="stat-num">4+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">0.945</div>
+              <div class="stat-label">Zindi AUC</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">TDS</div>
+              <div class="stat-label">Published Writing</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">OS</div>
+              <div class="stat-label">Open Source</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Experience -->
+    <section class="section">
+      <div class="reveal">
+        <div class="section-label">Experience</div>
+        <h2 class="section-title">Work<br/><em>History</em></h2>
+      </div>
+      <div class="exp-list reveal">
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">ML &amp; Data Engineer</div>
+            <div class="exp-company">Freelance / Independent</div>
+            <div class="exp-desc">RAG/LLM systems, MLOps infrastructure, time-series forecasting, and data engineering pipelines for clients across industries. Production-first approach from scoping through deployment.</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">2022 — Present</span>
+            <span class="exp-type">Remote</span>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">Hotel IT Systems Administrator</div>
+            <div class="exp-company">Hospitality Sector</div>
+            <div class="exp-desc">Managed and maintained IT infrastructure across hotel operations. Network administration, system monitoring, and technical support for operational continuity.</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">Prior</span>
+            <span class="exp-type">On-site</span>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div>
+            <div class="exp-role">System Administrator</div>
+            <div class="exp-company">Technology / Operations</div>
+            <div class="exp-desc">Systems administration, infrastructure management, and technical operations support across enterprise environments.</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">Prior</span>
+            <span class="exp-type">On-site</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Skills -->
+    <section class="section">
+      <div class="reveal">
+        <div class="section-label">Stack</div>
+        <h2 class="section-title">Skills &amp;<br/><em>Technologies</em></h2>
+      </div>
+      <div class="skills-grid reveal">
+        <div class="skill-group">
+          <div class="skill-group-title">ML / AI</div>
+          <ul class="skill-list">
+            <li>PyTorch · TensorFlow</li>
+            <li>LangChain · LlamaIndex</li>
+            <li>HuggingFace Transformers</li>
+            <li>XGBoost · LightGBM · CatBoost</li>
+            <li>Scikit-learn</li>
+            <li>Time-Series Forecasting</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Vector / RAG</div>
+          <ul class="skill-list">
+            <li>FAISS · Pinecone</li>
+            <li>Chroma · Weaviate</li>
+            <li>RAG Pipeline Design</li>
+            <li>LLM Orchestration</li>
+            <li>Embedding Models</li>
+            <li>Semantic Search</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">MLOps &amp; Data</div>
+          <ul class="skill-list">
+            <li>Docker · Kubernetes</li>
+            <li>GitHub Actions · CI/CD</li>
+            <li>Apache Airflow</li>
+            <li>FastAPI · REST APIs</li>
+            <li>dbt · BigQuery</li>
+            <li>Metaflow</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Competitions -->
+    <section class="section">
+      <div class="reveal">
+        <div class="section-label">Competitions</div>
+        <h2 class="section-title" style="font-size: clamp(24px, 3vw, 36px); margin-bottom: 32px;">Zindi <em>Results</em></h2>
+      </div>
+      <div class="reveal">
+        <div class="comp-inline">
+          <div>
+            <div class="comp-inline-label">Zindi · ML Competition</div>
+            <div class="comp-inline-name">Farm to Feed Challenge</div>
+          </div>
+          <div class="comp-inline-score">
+            0.945
+            <span>AUC Score</span>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--border); border-top: none; padding: 20px 32px; background: var(--surface);">
+          <p style="font-size: 12px; color: var(--muted); line-height: 1.85; max-width: 600px;">
+            Competing on Zindi keeps the fundamentals sharp. More results to follow as more competitions run.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="reveal">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Let's<br/><em>Work Together</em></h2>
+      </div>
+      <div class="contact-grid reveal">
+        <div>
+          <p class="contact-desc">
+            I'm open to remote contracts in ML engineering, RAG/LLM systems, MLOps, and data engineering.
+            If the work is interesting and the environment is right, I want to hear about it.
+          </p>
+          <a href="mailto:tomvclementina@gmail.com" class="contact-email-block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            tomvclementina@gmail.com
+          </a>
+        </div>
+        <div class="contact-links-col">
+          <a href="https://github.com/clementina-tom" target="_blank" rel="noopener" class="contact-link-row">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span class="contact-link-text">github.com/clementina-tom</span>
+            </div>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/clementina-tom" target="_blank" rel="noopener" class="contact-link-row">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+              <span class="contact-link-text">linkedin.com/in/clementina-tom</span>
+            </div>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://huggingface.co/Clementio" target="_blank" rel="noopener" class="contact-link-row">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><text y="15" font-size="14">🤗</text></svg>
+              <span class="contact-link-text">huggingface.co/Clementio</span>
+            </div>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://xbo78uswdvbsmsnka87e4j.streamlit.app" target="_blank" rel="noopener" class="contact-link-row">
+            <div class="contact-link-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span class="contact-link-text">PLRS Live Demo</span>
+            </div>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-left">
+        <p>© 2025 Clementina Tom. Built with <span>intention</span>.</p>
+        <p>Lagos, Nigeria — Remote Worldwide</p>
+      </div>
+      <div class="footer-icons">
+        <a href="https://github.com/clementina-tom" target="_blank" rel="noopener" class="icon-link" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/clementina-tom" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        </a>
+        <a href="https://huggingface.co/Clementio" target="_blank" rel="noopener" class="icon-link" aria-label="HuggingFace">
+          <svg viewBox="0 0 24 24" fill="currentColor"><text y="18" font-size="16">🤗</text></svg>
+        </a>
+        <a href="mailto:tomvclementina@gmail.com" class="icon-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

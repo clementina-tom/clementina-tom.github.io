@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Clementina Tom</title>
+  <meta name="description" content="Technical writing on ML systems, RAG architecture, and data engineering by Clementina Tom." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .post-item-full {
+      background: var(--bg);
+      padding: 32px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .post-item-full:first-child { border-top: 1px solid var(--border); }
+    .post-item-full::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 100%;
+      background: var(--accent-dim, rgba(200,245,66,0.04));
+      transition: width 0.3s ease;
+    }
+    .post-item-full:hover { background: var(--surface); }
+    .post-item-full:hover::before { width: 4px; background: var(--accent); }
+    .post-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 12px; }
+    .post-title-lg {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: color 0.2s;
+      line-height: 1.25;
+    }
+    .post-item-full:hover .post-title-lg { color: var(--accent); }
+    .post-excerpt {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+    .post-footer { display: flex; align-items: center; gap: 16px; }
+    .post-platform { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
+    .post-arrow { color: var(--border-light); transition: all 0.2s; font-size: 16px; }
+    .post-item-full:hover .post-arrow { color: var(--accent); transform: translate(3px, -3px); }
+
+    .post-coming {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .writing-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 560px;
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .writing-note::before {
+      content: '//';
+      position: absolute;
+      top: 28px; left: 32px;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1;
+    }
+    .writing-note p { padding-left: 28px; }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav id="nav">
+    <a href="../index.html" class="nav-logo">CT<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects/index.html">Projects</a></li>
+      <li><a href="index.html" class="active">Writing</a></li>
+      <li><a href="../about/index.html">About</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="../index.html">Home</a>
+    <a href="../projects/index.html">Projects</a>
+    <a href="index.html" class="active">Writing</a>
+    <a href="../about/index.html">About</a>
+  </div>
+
+  <div class="page-wrap">
+    <section class="section">
+
+      <div class="reveal">
+        <div class="section-label">Writing</div>
+        <h1 class="section-title">Technical<br/><em>Articles</em></h1>
+      </div>
+
+      <div class="writing-note reveal">
+        <p>
+          I write about ML architecture, production systems, and the decisions that don't make it into the README.
+          Published on Towards Data Science and Hashnode. More coming.
+        </p>
+      </div>
+
+      <div class="reveal">
+
+        <a href="https://hashnode.com" target="_blank" rel="noopener" class="post-item-full">
+          <div class="post-header">
+            <div class="post-title-lg">Building PLRS: A Production-Grade Learning Recommendation System</div>
+            <span class="post-arrow">↗</span>
+          </div>
+          <p class="post-excerpt">
+            A walkthrough of the full architecture behind PLRS — from the SAKT model and knowledge graph constraint layer
+            through to the FastAPI backend, rate limiting, and CI/CD pipeline. Covers the decisions that mattered and the ones that didn't.
+          </p>
+          <div class="post-footer">
+            <span class="post-tag">Architecture</span>
+            <span class="post-platform">Hashnode · Towards Data Science</span>
+            <span class="post-date">2025</span>
+          </div>
+        </a>
+
+        <a href="https://hashnode.com" target="_blank" rel="noopener" class="post-item-full">
+          <div class="post-header">
+            <div class="post-title-lg">Knowledge Graphs as Hard Constraints in Recommendation Systems</div>
+            <span class="post-arrow">↗</span>
+          </div>
+          <p class="post-excerpt">
+            Why prerequisite graphs should enforce ordering in learning systems — not just inform it. Explores how DAG-based
+            constraint layers change the character of recommendations and what the numbers actually look like when you measure it.
+          </p>
+          <div class="post-footer">
+            <span class="post-tag">ML Systems</span>
+            <span class="post-platform">Towards Data Science</span>
+            <span class="post-date">2025</span>
+          </div>
+        </a>
+
+        <a href="#" class="post-item-full post-coming">
+          <div class="post-header">
+            <div class="post-title-lg">RAG Beyond Naive Retrieval: Architecture Patterns for Production</div>
+            <span class="post-arrow">↗</span>
+          </div>
+          <p class="post-excerpt">
+            What nobody tells you about moving from a RAG prototype to something that runs in production. Chunking strategies,
+            retrieval evaluation, reranking, and the failure modes that only show up at scale.
+          </p>
+          <div class="post-footer">
+            <span class="post-tag">RAG / LLM</span>
+            <span class="post-platform">Towards Data Science</span>
+            <span class="post-date">Coming Soon</span>
+          </div>
+        </a>
+
+        <a href="#" class="post-item-full post-coming">
+          <div class="post-header">
+            <div class="post-title-lg">Post-Mortem: What I Learned from a Zindi Competition Gap Analysis</div>
+            <span class="post-arrow">↗</span>
+          </div>
+          <p class="post-excerpt">
+            Diagnosing data leakage in competition features — and what the diagnostic process looks like when you take it seriously.
+            A case study in the difference between EDA and understanding your data.
+          </p>
+          <div class="post-footer">
+            <span class="post-tag">Competitions</span>
+            <span class="post-platform">Hashnode</span>
+            <span class="post-date">Coming Soon</span>
+          </div>
+        </a>
+
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="footer-left">
+        <p>© 2025 Clementina Tom. Built with <span>intention</span>.</p>
+        <p>Lagos, Nigeria — Remote Worldwide</p>
+      </div>
+      <div class="footer-icons">
+        <a href="https://github.com/clementina-tom" target="_blank" rel="noopener" class="icon-link" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/clementina-tom" target="_blank" rel="noopener" class="icon-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        </a>
+        <a href="https://huggingface.co/Clementio" target="_blank" rel="noopener" class="icon-link" aria-label="HuggingFace">
+          <svg viewBox="0 0 24 24" fill="currentColor"><text y="18" font-size="16">🤗</text></svg>
+        </a>
+        <a href="mailto:tomvclementina@gmail.com" class="icon-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
